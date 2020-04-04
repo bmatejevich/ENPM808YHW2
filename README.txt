@@ -1,6 +1,6 @@
 README
 
-Please run the scripts in pycharm with the attached dependencies
+Please run the scripts in pycharm with the attached dependencies (screenshot)
 
 In pytorch main you can choose between problem 1 and problem 2
 
