@@ -10,6 +10,7 @@ from __main__ import *
 
 
 def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,test_set,test_sampler, classes):
+    """ trains NN for CIFAR 10 data and reports top1 and top3 error for training and testing data"""
     print("Hyper Parameters")
     print("############################################")
     print("batch size: ", batch_size)
@@ -47,42 +48,28 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
             LossVal = loss(ValO, labels)
             ValidationTotalLoss += LossVal.data
 
-        #print("Epoch #"+ str(epoch+1))
-
-
-
         for i, data in enumerate(train_loader, 0):
 
             runloss = 0.0
             inputs, labels = data
 
             inputs, labels = Variable(inputs), Variable(labels)
-
-
             # Set the parameter gradients to zero
             optimizer.zero_grad()
 
             # Forward pass, backward pass, optimize
             outputs = net(inputs)
-            #_, predicted = torch.max(outputs.data, 1)
-
             loss_size = loss(outputs, labels)
             loss_size.backward()
             optimizer.step()
 
             runloss = loss_size.data
             totalLoss += loss_size.data
-
-
-
             if counter%5 ==0:
                 points.append(counter)
                 costs.append(runloss)
-
             counter+=1
-        print("Epoch #"+str(epoch+1) +" Training Time: ", round(time.time() - epoch_start,2))
-
-
+        print("Epoch #"+str(epoch+1) +" Training Time: "+str(round(time.time() - epoch_start,2)))
 
     print("Total Training Time: ", round(time.time() - StartTrainTime,2))
 
@@ -92,15 +79,6 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
     plt.xlabel('iterations [epochs*(50,000/batch_size)]')
     plt.title("Learning Rate = " + str(lr) + " ,Batch Size = " + str(batch_size) + " ,Epochs = "+str(epochs))
     plt.show()
-
-
-
-
-
-
-
-
-
 
     test_loader = torch.utils.data.DataLoader(test_set, batch_size=1, sampler=test_sampler, num_workers=2)
     testcount = 0
@@ -140,10 +118,7 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
         all_labels.append(int(labels))
 
         top3 = torch.topk(TestO.data, 3)
-
         top3 = top3.indices.tolist()
-
-
 
         # TOP1 accuracy
         if predicted == int(labels):
@@ -209,7 +184,6 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
         cmt[int(tl), int(pl)] = cmt[int(tl), int(pl)] + 1
     cmt = cmt.numpy()
 
-
     images = ["plane","car","bird","cat","deer","dog","frog","horse","ship","truck"]
     df_cm = pd.DataFrame(cmt, index=[i for i in images],
                          columns=[i for i in images])
@@ -217,7 +191,6 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
     sn.heatmap(df_cm, annot=True)
     plt.title("Test Data Confusion Matrix")
     plt.show()
-
 
     time.sleep(2)
 
@@ -246,9 +219,7 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
     print('Sum of top 1 errors: ', round(sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]),2))
     print('Mean of top 1 errors: ', round((sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker])/10),2))
 
-
     print("########################## TESTING DATA TOP 3 ##################################")
-
     print("Percentage of predictions that WERE correct (top 3):  ", round(100 * (top3correct / testcount),2))
     # TOP 1 ERROR RATE
     planer = 100 * (top3error_plane / testcount)
@@ -274,12 +245,6 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
     print('Sum of top 3 errors: ', round(sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]),2))
     print('Mean of top 3 errors: ',
           round((sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]) / 10),2))
-
-
-
-
-
-
 
     ####################################### training  ####################################################
     train_loader = torch.utils.data.DataLoader(train_set, batch_size=1, sampler=train_sampler, num_workers=2)
@@ -330,7 +295,6 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
         if int(labels) in top3[0]:
             top3correctTrain += 1
 
-
         # TOP1 error rate aka percentage of time it was NOT correct
         if predicted != int(labels):
             if predicted == 0 :
@@ -353,7 +317,6 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
                 top1error_ship += 1
             elif predicted == 9:
                 top1error_truck += 1
-
 
             # TOP3 error rate aka percentage of time it was NOT correct
             if 0 not in top3[0] and int(labels) == 0:
@@ -388,7 +351,6 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
         cmt[int(tl), int(pl)] = cmt[int(tl), int(pl)] + 1
     cmt = cmt.numpy()
 
-
     images = ["plane", "car", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
     df_cm = pd.DataFrame(cmt, index=[i for i in images],
                          columns=[i for i in images])
@@ -397,7 +359,6 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
     plt.title("Training Data Confusion Matrix")
     plt.show()
     time.sleep(1)
-
 
     print("Percentage of predictions that WERE correct:  ", round(100 * (correct / traincount),2))
     # TOP 1 ERROR RATE
@@ -427,7 +388,6 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
           round((sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]) / 10), 2))
 
     print("########################## TRAINING DATA TOP 3 ##################################")
-
     print("Percentage of predictions that WERE correct (top 3):  ", round(100 * (top3correctTrain / traincount),2))
     # TOP 1 ERROR RATE
     planer = 100 * (top3error_plane / traincount)
@@ -454,7 +414,3 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
           round(sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]), 2))
     print('Mean of top 3 errors: ',
           round((sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]) / 10), 2))
-
-
-
-
