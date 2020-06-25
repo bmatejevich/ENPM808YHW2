@@ -4,17 +4,15 @@ import torchvision.transforms as transforms
 from MNistCNN import *
 from MNisttrainNN import *
 
-
-
 def unpickle(file):
+    """ loads pickle file"""
     import pickle
     with open(file, 'rb') as fo:
         dict = pickle.load(fo, encoding='bytes')
     return dict
 
-
-
 def Problem1Main():
+    """ trains and tests CNN for MNIST data"""
     seed = 42
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -37,11 +35,3 @@ def Problem1Main():
 
     MNisttrainNN(CNN, batch_size=200, epochs=3, lr=0.01, train_set=train_set, train_sampler=train_sampler,
              val_sampler=val_sampler, test_set=test_set, test_sampler=test_sampler, classes=classes)
-
-
-
-
-
-
-
-

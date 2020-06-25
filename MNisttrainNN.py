@@ -7,8 +7,6 @@ import seaborn as sn
 import pandas as pd
 from __main__ import *
 
-
-
 def MNisttrainNN(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,test_set,test_sampler, classes):
     print("Hyper Parameters")
     print("############################################")
@@ -47,12 +45,9 @@ def MNisttrainNN(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler
             LossVal = loss(ValO, labels)
             ValidationTotalLoss += LossVal.data
 
-
-
         for i, data in enumerate(train_loader, 0):
             runloss = 0.0
             inputs, labels = data
-
             inputs, labels = Variable(inputs), Variable(labels)
 
             # Set the parameter gradients to zero
@@ -66,16 +61,15 @@ def MNisttrainNN(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler
 
             runloss += loss_size.data
             totalLoss += loss_size.data
-            #Print every 100th batch of an epoch
 
             if counter % 5 == 0:
                 points.append(counter)
                 costs.append(runloss)
             counter +=1
-        print("Epoch #" + str(epoch + 1) + " Training Time: ", round(time.time() - epoch_start, 2))
+        print("Epoch #" + str(epoch + 1) + " Training Time: " + str(round(time.time() - epoch_start, 2)))
 
 
-    print("Total Training Time: ", round(time.time() - StartTrainTime,2))
+    print("Total Training Time: " + str(round(time.time() - StartTrainTime,2)))
 
     plt.scatter(points, np.squeeze(costs))
     plt.plot(points, np.squeeze(costs))
@@ -83,10 +77,6 @@ def MNisttrainNN(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler
     plt.xlabel('Iterations [epochs*(20,000/batch_size)]')
     plt.title("Learning Rate = " + str(lr) + " ,Batch Size = " + str(batch_size) + " ,Epochs = " + str(epochs))
     plt.show()
-
-
-
-
 
     test_loader = torch.utils.data.DataLoader(test_set, batch_size=1, sampler=test_sampler, num_workers=2)
     testcount = 0
@@ -127,7 +117,6 @@ def MNisttrainNN(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler
         all_labels.append(int(labels))
 
         top3 = torch.topk(TestO.data, 3)
-
         top3 = top3.indices.tolist()
 
         # TOP1 accuracy
@@ -194,7 +183,6 @@ def MNisttrainNN(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler
         cmt[int(tl), int(pl)] = cmt[int(tl), int(pl)] + 1
     cmt = cmt.numpy()
 
-
     images = ["1","2","3","4","5","6","7","8","9","0"]
     df_cm = pd.DataFrame(cmt, index=[i for i in images],
                          columns=[i for i in images])
@@ -205,7 +193,6 @@ def MNisttrainNN(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler
     time.sleep(2)
 
     print("TOP 1 Percentage of predictions that WERE correct:  ", 100 * (correct / testcount))
-
     # TOP 1 ERROR RATE
     er_1 = 100 * (top1error_1 / testcount)
     er_2 = 100 * (top1error_2 / testcount)
@@ -296,7 +283,6 @@ def MNisttrainNN(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler
         all_labels.append(int(labels))
 
         top3 = torch.topk(TestO.data, 3)
-
         top3 = top3.indices.tolist()
 
         # TOP1 accuracy
@@ -363,7 +349,6 @@ def MNisttrainNN(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler
         cmt[int(tl), int(pl)] = cmt[int(tl), int(pl)] + 1
     cmt = cmt.numpy()
 
-
     images = ["1","2","3","4","5","6","7","8","9","0"]
     df_cm = pd.DataFrame(cmt, index=[i for i in images],
                          columns=[i for i in images])
@@ -374,7 +359,6 @@ def MNisttrainNN(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler
     time.sleep(2)
 
     print("TOP 1 Percentage of predictions that WERE correct:  ", 100 * (correct / traincount))
-
     # TOP 1 ERROR RATE
     er_1 = 100 * (top1error_1 / traincount)
     er_2 = 100 * (top1error_2 / traincount)
