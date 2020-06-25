@@ -13,9 +13,9 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
     """ trains NN for CIFAR 10 data and reports top1 and top3 error for training and testing data"""
     print("Hyper Parameters")
     print("############################################")
-    print("batch size: ", batch_size)
-    print("epochs: ", epochs)
-    print("learning rate: ", lr)
+    print("batch size: " + str(batch_size))
+    print("epochs: " + str(epochs))
+    print("learning rate: " + str(lr))
     print("############################################")
     print("Thinking...")
 
@@ -71,7 +71,7 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
             counter+=1
         print("Epoch #"+str(epoch+1) +" Training Time: "+str(round(time.time() - epoch_start,2)))
 
-    print("Total Training Time: ", round(time.time() - StartTrainTime,2))
+    print("Total Training Time: " + str(round(time.time() - StartTrainTime,2)))
 
     plt.scatter(points, np.squeeze(costs))
     plt.plot(points, np.squeeze(costs))
@@ -194,7 +194,7 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
 
     time.sleep(2)
 
-    print("Percentage of predictions that WERE correct:  ", round(100 * (correct / testcount),2))
+    print("Percentage of predictions that WERE correct:  " + str(round(100 * (correct / testcount),2)))
     # TOP 1 ERROR RATE
     planer = 100 * (top1error_plane / testcount)
     carer = 100 * (top1error_car / testcount)
@@ -206,21 +206,19 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
     horseer = 100 * (top1error_horse / testcount)
     shiper = 100 * (top1error_ship / testcount)
     trucker = 100 * (top1error_truck / testcount)
-    print("Percentage of predictions that were NOT correct, plane :  ", round(planer,2))
-    print("Percentage of predictions that were NOT correct, car :  ", round(carer,2))
-    print("Percentage of predictions that were NOT correct, bird :  ", round(birder,2))
-    print("Percentage of predictions that were NOT correct, cat :  ", round(cater,2))
-    print("Percentage of predictions that were NOT correct, deer :  ", round(deerer,2))
-    print("Percentage of predictions that were NOT correct, dog :  ", round(doger,2))
-    print("Percentage of predictions that were NOT correct, frog :  ", round(froger,2))
-    print("Percentage of predictions that were NOT correct, horse :  ", round(horseer,2))
-    print("Percentage of predictions that were NOT correct, ship :  ", round(shiper,2))
-    print("Percentage of predictions that were NOT correct, truck :  ", round(trucker,2))
-    print('Sum of top 1 errors: ', round(sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]),2))
-    print('Mean of top 1 errors: ', round((sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker])/10),2))
+    print("Percentage of predictions that were NOT correct, plane :  " + str(round(planer,2)))
+    print("Percentage of predictions that were NOT correct, car :  " + str(round(carer,2)))
+    print("Percentage of predictions that were NOT correct, bird :  " + str(round(birder,2)))
+    print("Percentage of predictions that were NOT correct, cat :  " + str(round(cater,2)))
+    print("Percentage of predictions that were NOT correct, deer :  " + str(round(deerer,2)))
+    print("Percentage of predictions that were NOT correct, dog :  " + str(round(doger,2)))
+    print("Percentage of predictions that were NOT correct, frog :  " + str(round(froger,2)))
+    print("Percentage of predictions that were NOT correct, horse :  " + str(round(horseer,2)))
+    print("Percentage of predictions that were NOT correct, ship :  " + str(round(shiper,2)))
+    print("Percentage of predictions that were NOT correct, truck :  " + str(round(trucker,2)))
 
     print("########################## TESTING DATA TOP 3 ##################################")
-    print("Percentage of predictions that WERE correct (top 3):  ", round(100 * (top3correct / testcount),2))
+    print("Percentage of predictions that WERE correct (top 3):  " + str(round(100 * (top3correct / testcount),2)))
     # TOP 1 ERROR RATE
     planer = 100 * (top3error_plane / testcount)
     carer = 100 * (top3error_car / testcount)
@@ -232,19 +230,16 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
     horseer = 100 * (top3error_horse / testcount)
     shiper = 100 * (top3error_ship / testcount)
     trucker = 100 * (top3error_truck / testcount)
-    print("Percentage of predictions that were NOT correct, plane :  ", round(planer,2))
-    print("Percentage of predictions that were NOT correct, car :  ", round(carer,2))
-    print("Percentage of predictions that were NOT correct, bird :  ", round(birder,2))
-    print("Percentage of predictions that were NOT correct, cat :  ", round(cater,2))
-    print("Percentage of predictions that were NOT correct, deer :  ", round(deerer,2))
-    print("Percentage of predictions that were NOT correct, dog :  ", round(doger,2))
-    print("Percentage of predictions that were NOT correct, frog :  ", round(froger,2))
-    print("Percentage of predictions that were NOT correct, horse :  ", round(horseer,2))
-    print("Percentage of predictions that were NOT correct, ship :  ", round(shiper,2))
-    print("Percentage of predictions that were NOT correct, truck :  ", round(trucker,2))
-    print('Sum of top 3 errors: ', round(sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]),2))
-    print('Mean of top 3 errors: ',
-          round((sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]) / 10),2))
+    print("Percentage of predictions that were NOT correct, plane :  " + str(round(planer,2)))
+    print("Percentage of predictions that were NOT correct, car :  " + str(round(carer,2)))
+    print("Percentage of predictions that were NOT correct, bird :  " + str(round(birder,2)))
+    print("Percentage of predictions that were NOT correct, cat :  " + str(round(cater,2)))
+    print("Percentage of predictions that were NOT correct, deer :  " + str(round(deerer,2)))
+    print("Percentage of predictions that were NOT correct, dog :  " + str(round(doger,2)))
+    print("Percentage of predictions that were NOT correct, frog :  " + str(round(froger,2)))
+    print("Percentage of predictions that were NOT correct, horse :  " + str(round(horseer,2)))
+    print("Percentage of predictions that were NOT correct, ship :  " + str(round(shiper,2)))
+    print("Percentage of predictions that were NOT correct, truck :  " + str(round(trucker,2)))
 
     ####################################### training  ####################################################
     train_loader = torch.utils.data.DataLoader(train_set, batch_size=1, sampler=train_sampler, num_workers=2)
@@ -351,7 +346,7 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
         cmt[int(tl), int(pl)] = cmt[int(tl), int(pl)] + 1
     cmt = cmt.numpy()
 
-    images = ["plane", "car", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
+    images = ["plane" + "car" + "bird" + "cat" + "deer" + "dog" + "frog" + "horse" + "ship" + "truck"]
     df_cm = pd.DataFrame(cmt, index=[i for i in images],
                          columns=[i for i in images])
     plt.figure(figsize=(10, 7))
@@ -360,7 +355,7 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
     plt.show()
     time.sleep(1)
 
-    print("Percentage of predictions that WERE correct:  ", round(100 * (correct / traincount),2))
+    print("Percentage of predictions that WERE correct:  " + str(round(100 * (correct / traincount),2)))
     # TOP 1 ERROR RATE
     planer = 100 * (top1error_plane / traincount)
     carer = 100 * (top1error_car / traincount)
@@ -372,23 +367,19 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
     horseer = 100 * (top1error_horse / traincount)
     shiper = 100 * (top1error_ship / traincount)
     trucker = 100 * (top1error_truck / traincount)
-    print("Percentage of predictions that were NOT correct, plane :  ", round(planer, 2))
-    print("Percentage of predictions that were NOT correct, car :  ", round(carer, 2))
-    print("Percentage of predictions that were NOT correct, bird :  ", round(birder, 2))
-    print("Percentage of predictions that were NOT correct, cat :  ", round(cater, 2))
-    print("Percentage of predictions that were NOT correct, deer :  ", round(deerer, 2))
-    print("Percentage of predictions that were NOT correct, dog :  ", round(doger, 2))
-    print("Percentage of predictions that were NOT correct, frog :  ", round(froger, 2))
-    print("Percentage of predictions that were NOT correct, horse :  ", round(horseer, 2))
-    print("Percentage of predictions that were NOT correct, ship :  ", round(shiper, 2))
-    print("Percentage of predictions that were NOT correct, truck :  ", round(trucker, 2))
-    print('Sum of top 1 errors: ',
-          round(sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]), 2))
-    print('Mean of top 1 errors: ',
-          round((sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]) / 10), 2))
+    print("Percentage of predictions that were NOT correct, plane :  " + str(round(planer, 2)))
+    print("Percentage of predictions that were NOT correct, car :  " + str(round(carer, 2)))
+    print("Percentage of predictions that were NOT correct, bird :  " + str(round(birder, 2)))
+    print("Percentage of predictions that were NOT correct, cat :  " + str(round(cater, 2)))
+    print("Percentage of predictions that were NOT correct, deer :  " + str(round(deerer, 2)))
+    print("Percentage of predictions that were NOT correct, dog :  " + str(round(doger, 2)))
+    print("Percentage of predictions that were NOT correct, frog :  " + str(round(froger, 2)))
+    print("Percentage of predictions that were NOT correct, horse :  " + str(round(horseer, 2)))
+    print("Percentage of predictions that were NOT correct, ship :  " + str(round(shiper, 2)))
+    print("Percentage of predictions that were NOT correct, truck :  " + str(round(trucker, 2)))
 
     print("########################## TRAINING DATA TOP 3 ##################################")
-    print("Percentage of predictions that WERE correct (top 3):  ", round(100 * (top3correctTrain / traincount),2))
+    print("Percentage of predictions that WERE correct (top 3):  " + str(round(100 * (top3correctTrain / traincount),2)))
     # TOP 1 ERROR RATE
     planer = 100 * (top3error_plane / traincount)
     carer = 100 * (top3error_car / traincount)
@@ -400,17 +391,13 @@ def trainNet(net, batch_size, epochs, lr,train_set,train_sampler,val_sampler,tes
     horseer = 100 * (top3error_horse / traincount)
     shiper = 100 * (top3error_ship / traincount)
     trucker = 100 * (top3error_truck / traincount)
-    print("Percentage of predictions that were NOT correct, plane :  ", round(planer, 2))
-    print("Percentage of predictions that were NOT correct, car :  ", round(carer, 2))
-    print("Percentage of predictions that were NOT correct, bird :  ", round(birder, 2))
-    print("Percentage of predictions that were NOT correct, cat :  ", round(cater, 2))
-    print("Percentage of predictions that were NOT correct, deer :  ", round(deerer, 2))
-    print("Percentage of predictions that were NOT correct, dog :  ", round(doger, 2))
-    print("Percentage of predictions that were NOT correct, frog :  ", round(froger, 2))
-    print("Percentage of predictions that were NOT correct, horse :  ", round(horseer, 2))
-    print("Percentage of predictions that were NOT correct, ship :  ", round(shiper, 2))
-    print("Percentage of predictions that were NOT correct, truck :  ", round(trucker, 2))
-    print('Sum of top 3 errors: ',
-          round(sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]), 2))
-    print('Mean of top 3 errors: ',
-          round((sum([planer, carer, birder, cater, deerer, doger, froger, horseer, shiper, trucker]) / 10), 2))
+    print("Percentage of predictions that were NOT correct, plane :  " + str(round(planer, 2)))
+    print("Percentage of predictions that were NOT correct, car :  " + str(round(carer, 2)))
+    print("Percentage of predictions that were NOT correct, bird :  " + str(round(birder, 2)))
+    print("Percentage of predictions that were NOT correct, cat :  " + str(round(cater, 2)))
+    print("Percentage of predictions that were NOT correct, deer :  " + str(round(deerer, 2)))
+    print("Percentage of predictions that were NOT correct, dog :  " + str(round(doger, 2)))
+    print("Percentage of predictions that were NOT correct, frog :  " + str(round(froger, 2)))
+    print("Percentage of predictions that were NOT correct, horse :  " + str(round(horseer, 2)))
+    print("Percentage of predictions that were NOT correct, ship :  " + str(round(shiper, 2)))
+    print("Percentage of predictions that were NOT correct, truck :  " + str(round(trucker, 2)))
