@@ -4,6 +4,7 @@ from __main__ import *
 class MNistCNN(NN.Module):
 
     def __init__(self):
+        """ defines structure of CNN"""
         super(MNistCNN, self).__init__()
         self.conv1 = NN.Conv2d(1, 32, 3, 1)
         self.conv2 = NN.Conv2d(32, 64, 3, 1)
@@ -13,6 +14,7 @@ class MNistCNN(NN.Module):
         self.fc2 = NN.Linear(128, 10)
 
     def forward(self, x):
+        """ forward propogation through CNN"""
         x = self.conv1(x)
         x = F.relu(x)
         x = self.conv2(x)
